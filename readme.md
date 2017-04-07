@@ -40,6 +40,33 @@ atau kamu bisa [register](http://larabuk.esy.es/register) dengan emailmu sebagai
 
 **Dan masih banyak lagi..**
 
+## Install
+
+- Download repository [ini](https://github.com/ryanrahman26/larabuk/archive/master.zip) dan extract di komputar Anda
+- Buka terminal masuk direktory utama dan jalankan `composer install`
+- Copy file `.env.examples` menjadi `.env`
+- Tambahkan `NOCAPTCHA_SECRET` dan `NOCAPTCHA_SITEKEY` di file `.env` kemudian isi key dari [Google Recaptcha](https://www.google.com/recaptcha)
+- Buat database kemudian set `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`, di file `.env`
+- Set email address di `config/mail.php` dengan email GMail valid karena Larabuk menggunakan SMTP GMail
+```
+'from' => [
+    'address' => env('MAIL_FROM_ADDRESS', 'email@gmail.com'),
+    'name' => env('MAIL_FROM_NAME', 'Admin Larabuk'),
+],
+```
+- Set email address di `.env`
+```
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=email@gmail.com
+MAIL_PASSWORD=password
+MAIL_ENCRYPTION=tls
+```
+- Jalankan `php artisan migrate --seed`
+- Jalankan web server `php artisan serve`
+- Buka `localhost` dibrowser
+
 # Ketemu error ?
 
 Silahkan mengirim e-mail ke ryanrahman26@gmail.com
