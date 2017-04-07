@@ -109,15 +109,6 @@
                 </div>
             {!! Form::close() !!}
 
-            <div class="social-auth-links text-center">
-              <p>- ATAU -</p>
-              <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Masuk dengan
-                Facebook</a>
-              <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Masuk dengan
-                Google+</a>
-            </div>
-            <!-- /.social-auth-links -->
-
             <a href="{{ route('login') }}">Saya sudah punya akun</a>
 
         </div>

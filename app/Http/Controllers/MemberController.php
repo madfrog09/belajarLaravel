@@ -81,6 +81,34 @@ class MemberController extends Controller
         $memberRole = Role::where('name', 'member')->first();
         $member->attachRole($memberRole);
 
+        // Isi field cover jika ada cover yang diupload
+        if ($request->hasFile('avatar')) {
+
+            // Mengambil file yang diupload
+            $uploaded_avatar = $request->file('avatar');
+
+            // Mengambil extension file
+            $extension = $uploaded_avatar->getClientOriginalExtension();
+
+            // Membuat nama file random berikut extension
+            $filename = md5(time()) . "." . $extension;
+
+            // Menyimpan cover ke folder public/img
+            $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
+            $uploaded_avatar->move($destinationPath, $filename);
+
+            // Mengisi field cover di book dengan filename yang baru dibuat
+            $member->avatar = $filename;
+            $member->save();
+
+        } else {
+
+            // Jika tidak ada cover yang diupload, pilih member_avatar.png
+            $filename = "member_avatar.png";
+            $member->avatar = $filename;
+            $member->save();
+        }
+
         // Kirim email
         Mail::send('auth.emails.invite', compact('member', 'password'), function($m) use ($member) {
             $m->to($member->email, $member->name)->subject('Anda telah didaftarkan di Larapus!');
@@ -88,6 +116,7 @@ class MemberController extends Controller
 
         Session::flash("flash_notification", [
             "level"     =>  "success",
+            "icon" => "fa fa-check",
             "message"   =>  "Berhasil menyimpan member dengan email " . "<strong>" . $data['email'] . "</strong>" . " dan password <strong>" . $password . "</strong>."
         ]);
 

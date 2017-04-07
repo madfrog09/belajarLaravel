@@ -248,7 +248,7 @@ class BooksController extends Controller
             ]);
         }
 
-        return redirect("/book");
+        return redirect("/member/books");
     }
 
     // Fungsi mengembalikan buku oleh member

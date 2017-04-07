@@ -78,6 +78,7 @@ class SettingsController extends Controller
 
         Session::flash("flash_notification", [
             "level" => "success",
+            "icon" => "fa fa-check",
             "message" => "Profile berhasil diubah"
         ]);
 
@@ -104,6 +105,7 @@ class SettingsController extends Controller
 
         Session::flash("flash_notification", [
             "level" => "success",
+            "icon" => "fa fa-check",
             "message" => "Password berhasil dirubah"
         ]);
 
