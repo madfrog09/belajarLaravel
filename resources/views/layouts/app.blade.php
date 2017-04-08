@@ -58,20 +58,36 @@
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <!-- The user image in the navbar-->
-                                <img src="{{ asset('/img/'. auth()->user()->avatar) }}" class="user-image" alt="User Image">
-                                <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">{!! auth()->user()->name !!}</span>
+                                @if (Auth::check())
+                                    <!-- The user image in the navbar-->
+                                    <img src="{{ asset('/img/'. auth()->user()->avatar) }}" class="user-image" alt="User Image">
+                                    <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                    <span class="hidden-xs">{!! auth()->user()->name !!}</span>
+                                @else
+                                    <!-- The user image in the navbar-->
+                                    <img src="{{ asset('/img/default-50x50.gif') }}" class="user-image" alt="User Image">
+                                    <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                                    <span class="hidden-xs">User</span>
+                                @endif
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
-                                    <img src="{{ asset('/img/'. auth()->user()->avatar) }}" class="img-circle" alt="User Image">
+                                    @if (Auth::check())
+                                        <img src="{{ asset('/img/'. auth()->user()->avatar) }}" class="img-circle" alt="User Image">
 
-                                    <p>
-                                        {!! auth()->user()->name !!}
-                                        <small>{!! auth()->user()->email !!}</small>
-                                    </p>
+                                        <p>
+                                            {!! auth()->user()->name !!}
+                                            <small>{!! auth()->user()->email !!}</small>
+                                        </p>
+                                    @else
+                                        <img src="{{ asset('/img/default-50x50.gif') }}" class="img-circle" alt="User Image">
+
+                                        <p>
+                                            User
+                                            <small>Email</small>
+                                        </p>
+                                    @endif
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
@@ -81,6 +97,13 @@
                                         </div>
                                         <div class="pull-right">
                                             <a href="{{ route('logout') }}" class="btn btn-default btn-flat" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Sign out</a>
+                                        </div>
+                                    @else
+                                        <div class="pull-left">
+                                            <a href="#" class="btn btn-default btn-flat">Profil</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a href="#" class="btn btn-default btn-flat">Sign out</a>
                                         </div>
                                     @endif
                                 </li>
@@ -98,117 +121,147 @@
 
                 <!-- Sidebar user panel (optional) -->
                 <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="{{ asset('/img/'. auth()->user()->avatar) }}" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <p>{!! auth()->user()->name !!}</p>
-                        <!-- Status -->
-                        @if (auth()->user()->hasRole('admin'))
+                    @if (Auth::check())
+                        <div class="pull-left image">
+                            <img src="{{ asset('/img/'. auth()->user()->avatar) }}" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p>{!! auth()->user()->name !!}</p>
+                            <!-- Status -->
+                            @if (auth()->user()->hasRole('admin'))
+                                <a href="#">
+                                    <i class="fa fa-circle text-success"></i>
+                                    Admin
+                                </a>
+                            @else
+                                <a href="#">
+                                    <i class="fa fa-circle text-success"></i>
+                                    Member
+                                </a>
+                            @endif
+                        </div>
+                    @else
+                        <div class="pull-left image">
+                            <img src="{{ asset('/img/default-50x50.gif') }}" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p>User</p>
+                            <!-- Status -->
                             <a href="#">
                                 <i class="fa fa-circle text-success"></i>
-                                Admin
+                                Belum Terdaftar
                             </a>
-                        @else
-                            <a href="#">
-                                <i class="fa fa-circle text-success"></i>
-                                Member
-                            </a>
-                        @endif
-                    </div>
+                        </div>
+                    @endif
                 </div>
 
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu">
                     <li class="header">MENU</li>
-                    <!-- Optionally, you can add icons to the links -->
-                    @if (Auth::check())
+                        @if (Auth::check())
+                            <!--
+                            Hanya coba buat menu 'active' pakai Blade macro.
+                            Tapi Lebih enak pakai Request::is()
+                            -->
+                            {!! Html::smartNav(url('home'), 'fa-dashboard', 'Dashboard') !!}
 
-                        <!-- Hanya coba buat menu 'active' pakai Blade macro.
-                        Tapi Lebih enak pakai Request::is()
-                    -->
-                    {!! Html::smartNav(url('home'), 'fa-dashboard', 'Dashboard') !!}
+                            <!--
+                            <li class="treeview {!! Request::is('home') ? 'active' : '' !!}">
+                                <a href="{{ url('home') }}">
+                                    <i class="fa fa-dashboard"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                            </li>
+                            -->
 
-                    <!--
-                    <li class="treeview {!! Request::is('home') ? 'active' : '' !!}">
-                    <a href="{{ url('home') }}">
-                    <i class="fa fa-dashboard"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
-        -->
+                            <!-- Optionally, you can add icons to the links -->
 
-        @role('member')
-        <li class="treeview {!! Request::is('member/books') ? 'active' : '' !!}">
-            <a href="{{ url('member/books') }}">
-                <i class="fa fa-book"></i>
-                <span>Buku</span>
-            </a>
-        </li>
-        @endrole
+                            @role('member')
+                            <li class="treeview {!! Request::is('member/books') ? 'active' : '' !!}">
+                                <a href="{{ url('member/books') }}">
+                                    <i class="fa fa-book"></i>
+                                    <span>Buku</span>
+                                </a>
+                            </li>
+                            @endrole
 
-        @role('admin')
-        <li class="treeview {!! Request::is('admin/authors*') ? 'active' : '' !!}">
-            <a href="{{ route('authors.index') }}">
-                <i class="fa fa-user-circle"></i>
-                <span>Penulis</span>
-            </a>
-        </li>
+                            @role('admin')
+                            <li class="treeview {!! Request::is('admin/authors*') ? 'active' : '' !!}">
+                                <a href="{{ route('authors.index') }}">
+                                    <i class="fa fa-user-circle"></i>
+                                    <span>Penulis</span>
+                                </a>
+                            </li>
 
-        <li class="treeview {!! Request::is('admin/*books*') ? 'active' : '' !!}">
-            <a href="{{ route('books.index') }}">
-                <i class="fa fa-book"></i>
-                <span>Buku</span>
-            </a>
-        </li>
+                            <li class="treeview {!! Request::is('admin/*books*') ? 'active' : '' !!}">
+                                <a href="{{ route('books.index') }}">
+                                    <i class="fa fa-book"></i>
+                                    <span>Buku</span>
+                                </a>
+                            </li>
 
-        <li class="treeview {!! Request::is('admin/members*') ? 'active' : '' !!}">
-            <a href="{{ route('members.index') }}">
-                <i class="fa fa-user"></i>
-                <span>Member</span>
-            </a>
-        </li>
+                            <li class="treeview {!! Request::is('admin/members*') ? 'active' : '' !!}">
+                                <a href="{{ route('members.index') }}">
+                                    <i class="fa fa-user"></i>
+                                    <span>Member</span>
+                                </a>
+                            </li>
 
-        <li class="treeview {!! Request::is('admin/statistics') ? 'active' : '' !!}">
-            <a href="{{ route('statistics.index') }}">
-                <i class="fa fa-bars"></i>
-                <span>Statistics</span>
-            </a>
-        </li>
-        @endrole
+                            <li class="treeview {!! Request::is('admin/statistics') ? 'active' : '' !!}">
+                                <a href="{{ route('statistics.index') }}">
+                                    <i class="fa fa-bars"></i>
+                                    <span>Statistics</span>
+                                </a>
+                            </li>
+                            @endrole
 
-        <li class="treeview {!! Request::is('settings/*') ? 'active' : '' !!}">
-            <a href="#">
-                <i class="fa fa-cogs"></i> <span>Pengaturan</span>
-                <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
-                </span>
-            </a>
-            <ul class="treeview-menu">
-                <li class="{!! Request::is('settings/profile*') ? 'active' : '' !!}">
-                    <a href="{{ url('/settings/profile/') }}">
-                        <i class="fa fa-user-o"></i> Profil
-                    </a>
-                </li>
-                <li class="{!! Request::is('settings/password') ? 'active' : '' !!}">
-                    <a href="{{ url('/settings/password') }}">
-                        <i class="fa fa-lock"></i> Ubah Password
-                    </a>
-                </li>
-            </ul>
-        </li>
+                            <li class="treeview {!! Request::is('settings/*') ? 'active' : '' !!}">
+                                <a href="#">
+                                    <i class="fa fa-cogs"></i> <span>Pengaturan</span>
+                                    <span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i>
+                                    </span>
+                                </a>
+                                <ul class="treeview-menu">
+                                    <li class="{!! Request::is('settings/profile*') ? 'active' : '' !!}">
+                                        <a href="{{ url('/settings/profile/') }}">
+                                            <i class="fa fa-user-o"></i> Profil
+                                        </a>
+                                    </li>
+                                    <li class="{!! Request::is('settings/password') ? 'active' : '' !!}">
+                                        <a href="{{ url('/settings/password') }}">
+                                            <i class="fa fa-lock"></i> Ubah Password
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
 
-        <li class="treeview {!! Request::is('logout') ? 'active' : '' !!}">
-            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                <i class="fa fa-sign-out"></i>
-                <span>Sign out</span>
-            </a>
+                            <li class="treeview {!! Request::is('logout') ? 'active' : '' !!}">
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <i class="fa fa-sign-out"></i>
+                                    <span>Sign out</span>
+                                </a>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                {{ csrf_field() }}
-            </form>
-        </li>
-    @endif
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        @else
+                            <li class="treeview">
+                                <a href="{{ url('/register') }}">
+                                    <i class="fa fa-sign-in"></i>
+                                    <span>Daftar Baru</span>
+                                </a>
+                            </li>
+
+                            <li class="treeview">
+                                <a href="{{ url('/login') }}">
+                                    <i class="fa fa-lock"></i>
+                                    <span>Login</span>
+                                </a>
+                            </li>
+                        @endif
+
 </ul>
 <!-- /.sidebar-menu -->
 </section>

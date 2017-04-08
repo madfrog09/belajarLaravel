@@ -1,16 +1,16 @@
 @extends('layouts.app')
 
+@section('dashboard')
+    Dashboard
+    <small>Admin</small>
+@endsection
+
+@section('breadcrumb')
+    <li><a href="{{ url('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li class="active">Dashboard</li>
+@endsection
+
 @section('content')
-    @section('dashboard')
-        Dashboard
-        <small>Admin</small>
-    @endsection
-
-    @section('breadcrumb')
-        <li><a href="{{ url('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-    @endsection
-
     <!-- Welcome -->
     <div class="row">
         <div class="col-md-12">

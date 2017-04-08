@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
+@section('dashboard')
+    Member
+    <small>Detail {{ $member->name }}</small>
+@endsection
+
+@section('breadcrumb')
+    <li><a href="{{ url('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href=" {{ url('admin/members') }}">Member</a></li>
+    <li class="active">Detail {{ $member->name }}</li>
+@endsection
+
 @section('content')
-    @section('dashboard')
-        Member
-        <small>Detail {{ $member->name }}</small>
-    @endsection
-
-    @section('breadcrumb')
-        <li><a href="{{ url('home') }}"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href=" {{ url('admin/members') }}">Member</a></li>
-        <li class="active">Detail {{ $member->name }}</li>
-    @endsection
-
     <div class="row">
         <div class="col-md-6">
             <div class="box box-primary">

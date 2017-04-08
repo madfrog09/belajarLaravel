@@ -1,17 +1,17 @@
 @extends('layouts.app')
 
+@section('dashboard')
+    Profile
+    <small>Edit Profile</small>
+@endsection
+
+@section('breadcrumb')
+    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+    <li><a href="{{ url('/settings/profile/') }}">Profile</a></li>
+    <li class="active">Edit Profile</li>
+@endsection
+
 @section('content')
-    @section('dashboard')
-        Profile
-        <small>Edit Profile</small>
-    @endsection
-
-    @section('breadcrumb')
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li><a href="{{ url('/settings/profile/') }}">Profile</a></li>
-        <li class="active">Edit Profile</li>
-    @endsection
-
     <div class="row">
         <div class="col-md-6">
             <div class="box box-primary">
