@@ -65,7 +65,7 @@ MAIL_ENCRYPTION=tls
 ```
 - Jalankan `php artisan migrate --seed`
 - Jalankan web server `php artisan serve`
-- Buka `localhost` dibrowser
+- Buka `localhost:8000` dibrowser
 
 # Ketemu error ?
 
