@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Requests\UpdateMemberRequest;
 
-class MemberController extends Controller
+class MembersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,18 +26,9 @@ class MemberController extends Controller
             $members = Role::where('name', 'member')->first()->users;
 
             return Datatables::of($members)
-                ->addColumn('name', function($member) {
-                    return '<a href="'.route('members.show', $member->id).'">'.$member->name.'</a>';
-                })
                 ->addColumn('action', function($member) {
-                    return view('datatable._action', [
-                        'model' => $member,
-                        'form_url' => route('members.destroy', $member->id),
-                        'edit_url' => route('members.edit', $member->id),
-                        'confirm_message' => 'Yakin mau menghapus ' . $member->name . '?'
-                    ]);
-                })
-                ->rawColumns(['name', 'action'])->make(true);
+                    return view('datatable._member-action', compact('member'))->render();
+                })->make(true);
         }
 
         $html = $htmlBuilder

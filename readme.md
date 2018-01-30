@@ -1,10 +1,10 @@
 # Larabuk
-
-Sistem Informasi Perpustakaan Laravel 5.4 & Admin LTE. Larabuk versi peningkatan dari [Larapus](https://github.com/ryanrahman26/larapus) sample projek e-book [Seminggu Belajar Laravel](https://leanpub.com/seminggubelajarlaravel) oleh [Rahwat Awaludin](http://facebook.com/rahmat.awaludin).
+Sistem Informasi Perpustakaan Laravel 5.4 & Admin LTE. Larabuk versi peningkatan dari [Larapus](https://github.com/ryanrahman26/larapus) yang merupakan sample projek dari e-book [Seminggu Belajar Laravel](https://leanpub.com/seminggubelajarlaravel) oleh mas [Rahwat Awaludin](http://facebook.com/rahmat.awaludin).
 
 ## Demo
-
 [http://larabuk.esy.es](http://larabuk.esy.es)
+
+**Detail Login**
 
 **Admin**
 - Email: admin@gmail.com
@@ -14,10 +14,9 @@ Sistem Informasi Perpustakaan Laravel 5.4 & Admin LTE. Larabuk versi peningkatan
 - Email: member@gmail.com
 - Password: rahasia
 
-atau kamu bisa [register](http://larabuk.esy.es/register) dengan emailmu sebagai member :)
+Atau kamu bisa [register](http://larabuk.esy.es/register) dengan emailmu sebagai member :)
 
 ## Fitur
-
 **Admin**
 - Tambah, Ubah, Hapus Penulis
 - Tambah, Ubah, Hapus Buku
@@ -31,19 +30,18 @@ atau kamu bisa [register](http://larabuk.esy.es/register) dengan emailmu sebagai
 - Meminjam Buku
 - Mengembalikan Buku
 
-**Autentifikasi**
+**Auth**
 - Login
 - Register
 - Lupa Password
-- Lihat Profile/Ubah Profile
 - Ubah Password
+- Lihat Profile/Ubah Profile
 
-**Dan masih banyak lagi..**
+**Dan masih banyak lagi...**
 
 ## Install
-
-- Download repository [ini](https://github.com/ryanrahman26/larabuk/archive/master.zip) dan extract di komputar Anda
-- Buka terminal masuk direktory utama dan jalankan `composer install`
+- Download repository [ini](https://github.com/ryanrahman26/larabuk/archive/master.zip) kemudian extract di komputar Anda atau clone dengan `git clone https://github.com/ryanrahman26/larabuk.git`
+- Buka terminal/command prompt masuk direktori utama dan jalankan `composer install`
 - Copy file `.env.examples` menjadi `.env`
 - Tambahkan `NOCAPTCHA_SECRET` dan `NOCAPTCHA_SITEKEY` di file `.env` kemudian isi key dari [Google Recaptcha](https://www.google.com/recaptcha)
 - Buat database kemudian set `DB_DATABASE`, `DB_USERNAME`, `DB_PASSWORD`, di file `.env`
@@ -64,13 +62,11 @@ MAIL_PASSWORD=password
 MAIL_ENCRYPTION=tls
 ```
 - Jalankan `php artisan migrate --seed`
-- Jalankan web server `php artisan serve`
-- Buka `localhost:8000` dibrowser
+- Jalankan php web server `php artisan serve`
+- Buka `localhost:8000`
 
-# Ketemu error ?
+## Menemukan error ?
+Buat sebuah [issue](https://github.com/ryanrahman26/larabuk/issues)
 
-Silahkan mengirim e-mail ke ryanrahman26@gmail.com
-
-# License
-
-[MIT license](http://opensource.org/licenses/MIT)
+## License
+[MIT](http://opensource.org/licenses/MIT)

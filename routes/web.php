@@ -11,26 +11,74 @@
 |
 */
 
-// Auth
-Auth::routes();
-
-// Index
-Route::get('/', 'HomeController@index');
-
-Route::get('/home', 'HomeController@index');
-
-//
-// Admin
-//
 Route::group(['midlleware' => 'web'], function() {
 
+    // Auth
+    Auth::routes();
+
+    // Index
+    Route::get('/', 'HomeController@index');
+
+    Route::get('/home', 'HomeController@index');
+
+    //
+    // Member
+    //
+
+    // Daftar Peminjaman
+    Route::get('member/books', 'BooksController@memberBook');
+
+    // Daftar Buku untuk dipinjam
+    Route::get('books/{books}/borrow', [
+        'middleware' => ['auth', 'role:member'],
+        'as' => 'member.books.borrow',
+        'uses' => 'BooksController@borrow'
+    ]);
+
+    // Pengembalian buku
+    Route::put('books/{book}/return', [
+        'middleware' => ['auth', 'role:member'],
+        'as' => 'member.books.return',
+        'uses' => 'BooksController@returnBack'
+    ]);
+
+    //
+    // Berlaku untuk Member & Admin
+    //
+
+    // Profile
+    Route::get('settings/profile', 'SettingsController@profile');
+
+    // Edit Profile
+    Route::get('settings/profile/edit', 'SettingsController@editProfile');
+
+    // Update Profile
+    Route::post('settings/profile', 'SettingsController@updateProfile');
+
+    // Ubah password
+    Route::get('settings/password', 'SettingsController@editPassword');
+    Route::post('settings/password', 'SettingsController@updatePassword');
+
+    //
+    // Aktiviasi & Verifikasi Email
+    //
+
+    // Kirim Email Verifikasi waktu Register
+    Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
+
+    // Kirim Ulang email Verifikasi
+    Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
+
+    // Admin
     Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:admin']], function() {
         Route::resource('authors', 'AuthorsController');
         Route::resource('books', 'BooksController');
-        route::resource('members', 'Membercontroller');
+        Route::resource('members', 'MembersController', [
+            'only' => ['index', 'show', 'destroy']
+        ]);
 
         // Daftar peminjaman
-        route::get('statistics', [
+        Route::get('statistics', [
             'as' => 'statistics.index',
             'uses' => 'StatisticsController@index'
         ]);
@@ -40,6 +88,7 @@ Route::group(['midlleware' => 'web'], function() {
             'as' => 'export.books',
             'uses' => 'BooksController@export'
         ]);
+
         Route::post('export/books', [
             'as' => 'export.books.post',
             'uses' => 'BooksController@exportPost'
@@ -50,6 +99,7 @@ Route::group(['midlleware' => 'web'], function() {
             'as' => 'template.books',
             'uses' => 'BooksController@generateExcelTemplate'
         ]);
+
         // Import dari excel
         Route::post('import/books', [
             'as' => 'import.books',
@@ -57,47 +107,3 @@ Route::group(['midlleware' => 'web'], function() {
         ]);
     });
 });
-
-//
-// Member
-//
-
-// Daftar Peminjaman
-Route::get('member/books', 'BooksController@memberBook');
-// Daftar Buku untuk dipinjam
-Route::get('books/{books}/borrow', [
-    'middleware' => ['auth', 'role:member'],
-    'as' => 'member.books.borrow',
-    'uses' => 'BooksController@borrow'
-]);
-// Pengembalian buku
-Route::put('books/{book}/return', [
-    'middleware' => ['auth', 'role:member'],
-    'as' => 'member.books.return',
-    'uses' => 'BooksController@returnBack'
-]);
-
-//
-// Berlaku untuk Member & Admin
-//
-
-// Profile
-Route::get('settings/profile', 'SettingsController@profile');
-// Edit Profile
-Route::get('settings/profile/edit', 'SettingsController@editProfile');
-// Update Profile
-Route::post('settings/profile', 'SettingsController@updateProfile');
-
-// Ubah password
-Route::get('settings/password', 'SettingsController@editPassword');
-Route::post('settings/password', 'SettingsController@updatePassword');
-
-//
-// Aktiviasi & Verifikasi Email
-//
-
-// Kirim Email Verifikasi waktu Register
-Route::get('auth/verify/{token}', 'Auth\RegisterController@verify');
-
-// Kirim Ulang email Verifikasi
-Route::get('auth/send-verification', 'Auth\RegisterController@sendVerification');
