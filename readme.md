@@ -1,10 +1,7 @@
 # Larabuk
 Sistem Informasi Perpustakaan Laravel 5.4 & Admin LTE. Larabuk versi peningkatan dari [Larapus](https://github.com/ryanrahman26/larapus) yang merupakan sample projek dari e-book [Seminggu Belajar Laravel](https://leanpub.com/seminggubelajarlaravel) oleh mas [Rahwat Awaludin](http://facebook.com/rahmat.awaludin).
 
-## Demo
-[http://larabuk.esy.es](http://larabuk.esy.es)
-
-**Detail Login**
+## Login
 
 **Admin**
 - Email: admin@gmail.com
@@ -13,8 +10,6 @@ Sistem Informasi Perpustakaan Laravel 5.4 & Admin LTE. Larabuk versi peningkatan
 **Member**
 - Email: member@gmail.com
 - Password: rahasia
-
-Atau kamu bisa [register](http://larabuk.esy.es/register) dengan emailmu sebagai member :)
 
 ## Fitur
 **Admin**
