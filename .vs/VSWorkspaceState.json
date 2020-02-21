@@ -4,12 +4,13 @@
     "\\app",
     "\\app\\Http",
     "\\app\\Http\\Controllers",
-    "\\app\\Http\\Controllers\\Auth",
+    "\\database",
+    "\\database\\migrations",
     "\\resources",
     "\\resources\\views",
     "\\resources\\views\\dashboard",
     "\\routes"
   ],
-  "SelectedNode": "\\app\\User.php",
+  "SelectedNode": "\\app\\siswa.php",
   "PreviewInSolutionExplorer": false
 }

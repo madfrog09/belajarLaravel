@@ -13,6 +13,8 @@
 
 Route::get('registrasi/name/{name}/email/{email}/password/{password}', 'Auth\RegisterController@createNewUser');
 Route::get('api/login/{username}/pass/{password}', 'myAPIController@siswaLogin');
+Route::get('api/logout/{username}', 'myAPIController@siswaLogout');
+Route::get('api/reguler/{nis}/t/{token}', 'myAPIController@getTabunganReguler');
 
 Route::group(['midlleware' => 'web'], function() {
 

@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class siswa extends Model
 {
-	protected $table = "siswas";
+	protected $table = "siswa";
 	protected $fillable = [
         'nis', 'nama_lengkap', 'kelas', 'angkatan', 'ttl', 'telp_ortu', 'email', 'nama_pengguna', 'katasandi', 'token','aktif','created_at','updated_at'
     ];
@@ -20,9 +20,7 @@ class siswa extends Model
             
             $token = str_random(40);
             $this->token = $token;
-            $this->save();
         }
-
         return $token;
     }
 
@@ -31,8 +29,7 @@ class siswa extends Model
     {
         $token = $this->token;
         if ($token) {
-            $this->token = "";
-            $this->save();
+            $this->token = null;
         }
     }
 }
