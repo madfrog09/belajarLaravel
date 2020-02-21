@@ -12,7 +12,7 @@
 */
 
 Route::get('registrasi/name/{name}/email/{email}/password/{password}', 'Auth\RegisterController@createNewUser');
-Route::get('api/login/{username}/pass/{password}, 'myAPI@siswaLogin');
+Route::get('api/login/{username}/pass/{password}', 'myAPIController@siswaLogin');
 
 Route::group(['midlleware' => 'web'], function() {
 

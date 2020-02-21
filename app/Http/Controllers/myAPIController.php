@@ -9,9 +9,9 @@ class myAPIController extends Controller
 {
 	public function siswaLogin($username,$password)
     {
-        $datasiswa = siswa::where('username', $username)->where('password', $password)->get();
+        $datasiswa = siswa::where('nama_pengguna', $username)->where('katasandi', $password)->get();
         if (count($datasiswa)>0) {
-            $token = $datasiswa->generateToken();
+            $token = $datasiswa->GenerateToken();
 			$res['token'] = $token;
 			return response($res);
         }

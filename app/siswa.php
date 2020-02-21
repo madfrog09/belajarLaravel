@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class siswa extends Model
 {
+	protected $table = "siswas";
 	protected $fillable = [
         'nis', 'nama_lengkap', 'kelas', 'angkatan', 'ttl', 'telp_ortu', 'email', 'nama_pengguna', 'katasandi', 'token','aktif','created_at','updated_at'
     ];
 
 	//fungsi buat generate token
-    public function generateToken()
+    public function GenerateToken()
     {
         $token = $this->token;
 
