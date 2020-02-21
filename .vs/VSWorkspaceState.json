@@ -5,8 +5,11 @@
     "\\app\\Http",
     "\\app\\Http\\Controllers",
     "\\app\\Http\\Controllers\\Auth",
+    "\\resources",
+    "\\resources\\views",
+    "\\resources\\views\\dashboard",
     "\\routes"
   ],
-  "SelectedNode": "\\routes\\web.php",
+  "SelectedNode": "\\app\\User.php",
   "PreviewInSolutionExplorer": false
 }

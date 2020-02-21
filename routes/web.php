@@ -12,6 +12,7 @@
 */
 
 Route::get('registrasi/name/{name}/email/{email}/password/{password}', 'Auth\RegisterController@createNewUser');
+Route::get('api/login/{username}/pass/{password}, 'myAPI@siswaLogin');
 
 Route::group(['midlleware' => 'web'], function() {
 
@@ -63,6 +64,7 @@ Route::group(['midlleware' => 'web'], function() {
 
 	// Buatan Arfan
 	//Route::get('registrasi/name/{name}/email/{email}/password/{password}', 'Auth\RegisterController@createNewUser');
+	//Route::get('api/login/{username}/pass/{password}, 'myAPI@siswaLogin');
 
     //
     // Aktiviasi & Verifikasi Email
