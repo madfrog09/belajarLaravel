@@ -36,8 +36,10 @@ class HomeController extends Controller
 
             return view('dashboard.member', compact('borrowLogs'));
         }
-
-        if (Laratrust::hasRole('admin')) {
+		else if (Laratrust::hasRole('guru')) {
+            return view('dashboard.guru');
+        }
+        else if (Laratrust::hasRole('admin')) {
 
             $author = Author::all();
 

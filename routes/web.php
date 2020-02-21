@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('registrasi/name/{name}/email/{email}/password/{password}', 'Auth\RegisterController@createNewUser');
+
 Route::group(['midlleware' => 'web'], function() {
 
     // Auth
@@ -58,6 +60,9 @@ Route::group(['midlleware' => 'web'], function() {
     // Ubah password
     Route::get('settings/password', 'SettingsController@editPassword');
     Route::post('settings/password', 'SettingsController@updatePassword');
+
+	// Buatan Arfan
+	//Route::get('registrasi/name/{name}/email/{email}/password/{password}', 'Auth\RegisterController@createNewUser');
 
     //
     // Aktiviasi & Verifikasi Email

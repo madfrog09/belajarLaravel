@@ -111,6 +111,53 @@ class RegisterController extends Controller
 
         return $user;
     }
+	// Fungsi Buatan Ku :: Arfan Salamun ===========================================>
+	// Register Function Check by GET method
+	protected function createNewUser($name,$email,$password)
+    {
+        $user = User::create([
+            'name' => $name,
+            'email' => $email,
+            'password' => $password,
+        ]);
+
+        $request = app('request');
+
+        // Isi field cover jika ada cover yang diupload
+        if (false) {
+
+            // Mengambil file yang diupload
+            $uploaded_avatar = $request->file('avatar');
+
+            // Mengambil extension file
+            $extension = $uploaded_avatar->getClientOriginalExtension();
+
+            // Membuat nama file random berikut extension
+            $filename = md5(time()) . "." . $extension;
+
+            // Menyimpan cover ke folder public/img
+            $destinationPath = public_path() . DIRECTORY_SEPARATOR . 'img';
+            $uploaded_avatar->move($destinationPath, $filename);
+
+            // Mengisi field cover di book dengan filename yang baru dibuat
+            $user->avatar = $filename;
+            $user->save();
+
+        } else {
+
+            // Jika tidak ada cover yang diupload, pilih member_avatar.png
+            $filename = "member_avatar.png";
+            $user->avatar = $filename;
+            $user->save();
+        }
+
+        $memberRole = Role::where('name', 'guru')->first();
+        $user->attachRole($memberRole);
+        //$user->sendVerification();
+
+        return response("SUCCESS!");
+    }
+	// Fungsi Buatan Ku :: Arfan Salamun ===========================================>
 
     public function verify(Request $request, $token)
     {
