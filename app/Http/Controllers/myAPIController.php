@@ -44,10 +44,10 @@ class myAPIController extends Controller
 		}
     }
 
-	public function getTabunganReguler($nis,$token){
+	public function getTransaksi($jenistabungan,$nis,$token){
 		$datasiswa = siswa::where('nis', $nis)->where('token', $token)->first();
 		if ($datasiswa!=null) {
-			$data = DB::table('transaksi')->where('nis',$nis)->get();
+			$data = DB::table('transaksi')->where('nis',$nis)->where('jenis_tabungan', $jenistabungan)->get();
 			if(count($data)>0){
 				return response($data);
 			}

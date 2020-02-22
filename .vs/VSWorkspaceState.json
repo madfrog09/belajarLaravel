@@ -11,6 +11,6 @@
     "\\resources\\views\\dashboard",
     "\\routes"
   ],
-  "SelectedNode": "\\app\\siswa.php",
+  "SelectedNode": "\\routes\\web.php",
   "PreviewInSolutionExplorer": false
 }
